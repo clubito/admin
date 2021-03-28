@@ -1,0 +1,30 @@
+<div class="container">
+  <h1 class="text-center">Log in</h1>
+  <form (submit)="onSubmit(loginForm)" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="emailId">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="emailId"
+        placeholder="Enter email"
+        name="email"
+        ngModel
+      />
+    </div>
+    <div class="form-group">
+      <label for="passwordId">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="passwordId"
+        placeholder="Enter password"
+        name="password"
+        ngModel
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Log in!</button>
+  </form>
+  <p class="errMsg">{{ errorMessage }}</p>
+</div>
