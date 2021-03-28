@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { AllclubComponent } from './components/allclub/allclub.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HomepageComponent,
+    AllclubComponent,
   ],
   imports: [
     BrowserModule,
