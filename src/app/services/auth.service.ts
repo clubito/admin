@@ -12,20 +12,23 @@ const BACKEND_URL = environment.apiUrl;
 export class AuthService {
 
   private authMessageEmitter = new Subject<string>();
-  private token: string;
+  private authEmitter = new Subject<any>();
+  private token: string = null;
   private isAuthenticated: boolean;
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(private http: HttpClient) { 
   }
 
   login(email: string, password: string) {
-    this.http.post<any>(BACKEND_URL + "/login", {email, password}).subscribe(response => {
+      this.http.post<any>(BACKEND_URL + "/login", {email, password}).subscribe(response => {
       const token: string = response.token;
       localStorage.setItem("token", token);
       this.token = token;
       this.isAuthenticated = true;
-      // this.router.navigate(["/"]);
+      this.authEmitter.next(true);
     }, err => {
+      // console.log(err);
       this.authMessageEmitter.next(err.error.error);
+      this.authEmitter.next(false);
     })
   }
 
@@ -34,13 +37,15 @@ export class AuthService {
     if (token != null) {
       this.token = token;
       this.isAuthenticated = true;
+      this.authEmitter.next(true);
     }
   }
 
   logout() {
     localStorage.removeItem("token");
     this.isAuthenticated = false;
-    this.token = "";
+    this.token = null;
+    this.authEmitter.next(false);
   }
 
   getToken() {
@@ -49,6 +54,10 @@ export class AuthService {
 
   getAuthMessageEmitter(){
     return this.authMessageEmitter.asObservable();
+  }
+
+  getAuthEmitter() {
+    return this.authEmitter.asObservable();
   }
 
   getIsAuthenticated() {

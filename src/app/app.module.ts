@@ -7,11 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
