@@ -1,4 +1,4 @@
-<div class="container">
+
   <h1 class="text-center">Clubs</h1>
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <p *ngIf="getActiveClubs(clubApproved).length === 0">There is no active clubs</p>
+    <p class="mt-3" *ngIf="getActiveClubs(clubApproved).length === 0">There is no active clubs</p>
   </div>
 
   <!-- Deleted clubs page -->
@@ -64,6 +64,5 @@
         </div>
       </div>
     </div>
-    <p *ngIf="getDeletedClubs(clubApproved).length === 0">There is no deleted clubs</p>
+    <p class="mt-3" *ngIf="getDeletedClubs(clubApproved).length === 0">There is no deleted clubs</p>
   </div>
-</div>
