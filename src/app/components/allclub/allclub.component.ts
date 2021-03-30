@@ -9,6 +9,7 @@ import { ClubService } from 'src/app/services/club.service';
   styleUrls: ['./allclub.component.css']
 })
 export class AllclubComponent implements OnInit, OnDestroy {
+  private isActivePage: boolean = true;
   private itemPerRow: number = 2;
   private clubApproved: Club[] = [];
   private clubApprovedListener: Subscription;
@@ -19,7 +20,7 @@ export class AllclubComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.clubApprovedListener = this.clubService.getClubApprovedEmitter().subscribe(response => {
       this.clubApproved = response;
-      console.log(this.clubApproved);
+      // console.log(this.clubApproved);
     },
     err => {
       console.log(err)
@@ -45,5 +46,19 @@ export class AllclubComponent implements OnInit, OnDestroy {
       result.push(temp);
     }
     return result;
+  }
+
+  private toggleActivePage(activePage: boolean) {
+    this.isActivePage = activePage;
+    // this.isActivePage ? false : true;
+    console.log(this.isActivePage);
+  }
+
+  private getActiveClubs() {
+    return this.clubApproved.filter(club => club.deleted.isDeleted === false);
+  }
+
+  private getDeletedClubs() {
+    return this.clubApproved.filter(club => club.deleted.isDeleted === true);
   }
 }

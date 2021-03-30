@@ -43,6 +43,6 @@ export class SingleclubComponent implements OnInit, OnDestroy {
   }
 
   getStatus() {
-    return this.singleClub.deleted.isDeleted === true ? "Deleted" : "OK"
+    return this.singleClub.deleted.isDeleted === true ? "Deleted" : "Active"
   }
 }

@@ -1,20 +1,69 @@
-<div class="container text-center">
-  <h1>Approved Clubs</h1>
-  <p>Current number: {{clubApproved.length}}</p>
-  <input type="search" class="form-control" placeholder="Search...">
+<div class="container">
+  <h1 class="text-center">Clubs</h1>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': isActivePage}" [routerLink]="" (click)="toggleActivePage(true)">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': !isActivePage}" [routerLink]="" (click)="toggleActivePage(false)">Deleted</a>
+    </li>
+  </ul>
 
-
-  <div *ngFor="let clubSubArray of getTuple(clubApproved, itemPerRow)" class="row">
-    <div *ngFor="let club of clubSubArray" class="col-6 card">
-      <img [attr.src]="club.logo" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{club.name}}</h5>
-        <p class="card-text">Created At: {{club.createdAt}}</p>
-        <div>
-          <span *ngFor="let tag of club.tags" class="badge rounded-pill bg-info text-dark">{{tag}}</span>
+  <!-- Active clubs page -->
+  <div *ngIf="isActivePage">
+    <div *ngIf="getActiveClubs(clubApproved).length > 0">
+      <p class="mt-3">Number of active clubs: {{getActiveClubs(clubApproved).length}}</p>
+      <input type="search" class="form-control" placeholder="Search...">
+      <div *ngFor="let clubSubArray of getTuple(getActiveClubs(clubApproved), itemPerRow)" class="row text-center">
+        <div *ngFor="let club of clubSubArray" class="col-6">
+          <div class="card mt-3">
+            <div class="image pt-3">
+              <a routerLink="/clubs/{{club.name}}">
+              <img [attr.src]="club.logo" class="card-img-top" alt="...">
+              </a>
+            </div>
+            <hr>
+            <div class="card-body">
+              <h5 class="card-title">{{club.name}}</h5>
+              <p class="card-text">Created At: {{club.createdAt}}</p>
+              <div>
+                <span *ngFor="let tag of club.tags" class="badge bg-dark">{{tag}}</span>
+              </div>
+              <button type="button" class="btn   btn-primary" routerLink="/clubs/{{club.name}}">Click here</button>
+            </div>  
+          </div>
         </div>
-        <button type="button" class="btn btn-primary" routerLink="/clubs/{{club.name}}">Click for more details</button>
-      </div>  
+      </div>
     </div>
+    <p *ngIf="getActiveClubs(clubApproved).length === 0">There is no active clubs</p>
+  </div>
+
+  <!-- Deleted clubs page -->
+  <div *ngIf="!isActivePage">
+    <div *ngIf="getDeletedClubs(clubApproved).length > 0">
+      <p class="mt-3">Number of deleted clubs: {{getDeletedClubs(clubApproved).length}}</p>
+      <input type="search" class="form-control" placeholder="Search...">
+      <div *ngFor="let clubSubArray of getTuple(getDeletedClubs(clubApproved), itemPerRow)" class="row text-center">
+        <div *ngFor="let club of clubSubArray" class="col-6">
+          <div class="card mt-3">
+            <div class="image pt-3">
+              <a routerLink="/clubs/{{club.name}}">
+              <img [attr.src]="club.logo" class="card-img-top" alt="...">
+              </a>
+            </div>
+            <hr>
+            <div class="card-body">
+              <h5 class="card-title">{{club.name}}</h5>
+              <p class="card-text">Deleted at: {{club.deleted.deletedAt}}</p>
+              <div>
+                <span *ngFor="let tag of club.tags" class="badge bg-dark">{{tag}}</span>
+              </div>
+              <button type="button" class="btn   btn-primary" routerLink="/clubs/{{club.name}}">Click here</button>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+    <p *ngIf="getDeletedClubs(clubApproved).length === 0">There is no deleted clubs</p>
   </div>
 </div>
