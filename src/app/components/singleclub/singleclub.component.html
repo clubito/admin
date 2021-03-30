@@ -1,0 +1,60 @@
+<!-- Check if the club exists or not -->
+<div class="container text-center">
+  <img [attr.src]="singleClub.logo" alt="" class="img-thumbnail">
+  <h1>{{singleClub.name}}</h1>
+  <p class="lead">{{singleClub.description}}</p>
+  <p>Status: <span class="p-2 text-white" [ngClass]="(singleClub.deleted.isDeleted === false)?'bg-success':'bg-danger'">{{getStatus()}}</span></p>
+  <p>Tags: {{singleClub.tags}}</p>
+  <p>Created at: {{singleClub.createdAt}}</p>
+  <!-- Announcement -->
+  <hr>
+  <h5>Latest Announcement</h5>
+  <p *ngIf="singleClub.announcements.length === 0">There is no recent announcement</p>
+  <div *ngIf="singleClub.announcements.length > 0" class="card">
+      <div class="card-body">
+        {{singleClub.announcements[0].message}} - <span style="color: #adb5bd">{{singleClub.announcements[0].createdAt}}</span>
+      </div>
+  </div>
+  <!-- Event -->
+  <hr>
+  <h5>Latest Event</h5>
+  <p *ngIf="singleClub.events.length === 0">There is no recent event</p>
+  <div *ngIf="singleClub.events.length > 0" class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{singleClub.events[0].name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{singleClub.events[0].startTime}} - {{singleClub.events[0].endTime}}</h6>
+      <p class="card-text">{{singleClub.events[0].description}}</p>
+    </div>
+  </div>
+  <!-- member list -->
+  <hr>
+  <h5>Members</h5>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let obj of singleClub.members; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{obj.member.name}}</td>
+        <td>{{obj.member.email}}</td>
+        <td>{{obj.role}}</td>
+        <td><a class="link-secondary" routerLink="/users/{{obj.member._id}}">Profile</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+    <!-- delete, undelete club -->
+    <div class="d-grid gap-2">
+      <button type="button" class="btn btn-danger text-uppercase" [ngClass]="{'disabled': singleClub.deleted.isDeleted === true}" (click)="deleteClub()">Delete club</button>
+      <button type="button" class="btn btn-warning text-uppercase" [ngClass]="{'disabled': singleClub.deleted.isDeleted === false}" (click)="undeleteClub()">Undelete club</button>
+    </div>
+</div>
+

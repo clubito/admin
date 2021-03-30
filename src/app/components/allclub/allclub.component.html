@@ -1,3 +1,20 @@
-<p>
-  allclub works!
-</p>
+<div class="container text-center">
+  <h1>Approved Clubs</h1>
+  <p>Current number: {{clubApproved.length}}</p>
+  <input type="search" class="form-control" placeholder="Search...">
+
+
+  <div *ngFor="let clubSubArray of getTuple(clubApproved, itemPerRow)" class="row">
+    <div *ngFor="let club of clubSubArray" class="col-6 card">
+      <img [attr.src]="club.logo" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{club.name}}</h5>
+        <p class="card-text">Created At: {{club.createdAt}}</p>
+        <div>
+          <span *ngFor="let tag of club.tags" class="badge rounded-pill bg-info text-dark">{{tag}}</span>
+        </div>
+        <button type="button" class="btn btn-primary" routerLink="/clubs/{{club.name}}">Click for more details</button>
+      </div>  
+    </div>
+  </div>
+</div>

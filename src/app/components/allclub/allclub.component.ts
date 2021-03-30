@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { range, Subscription } from 'rxjs';
 import { Club } from 'src/app/models/club';
 import { ClubService } from 'src/app/services/club.service';
 
@@ -9,19 +9,41 @@ import { ClubService } from 'src/app/services/club.service';
   styleUrls: ['./allclub.component.css']
 })
 export class AllclubComponent implements OnInit, OnDestroy {
-  private clubList: [Club];
-  private clubListener: Subscription;
-  constructor(private clubService: ClubService) { }
+  private itemPerRow: number = 2;
+  private clubApproved: Club[] = [];
+  private clubApprovedListener: Subscription;
+  constructor(private clubService: ClubService) { 
+    this.clubApproved = clubService.getClubApproved();
+  }
 
   ngOnInit() {
-    this.clubService.getAllClubs();
-    this.clubListener = this.clubService.getClubEmitter().subscribe(response => {
-      this.clubList = response;
-      console.log(this.clubList);
+    this.clubApprovedListener = this.clubService.getClubApprovedEmitter().subscribe(response => {
+      this.clubApproved = response;
+      console.log(this.clubApproved);
+    },
+    err => {
+      console.log(err)
     })
+    this.clubService.getAllClubs();
   }
 
   ngOnDestroy(): void {
-    this.clubListener.unsubscribe();
+    this.clubApprovedListener.unsubscribe();
+  }
+
+  private getTuple(array: Club[], size: number) {
+    const result: Club[][] = [];
+    let temp: Club[] = [];
+    for (let item of array) {
+      if (temp.length >= size) {
+        result.push(temp);
+        temp = [];
+      }
+      temp.push(item);
+    }
+    if (temp.length != 0) {
+      result.push(temp);
+    }
+    return result;
   }
 }

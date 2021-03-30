@@ -9,6 +9,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { AllclubComponent } from './components/allclub/allclub.component';
+import { SingleclubComponent } from './components/singleclub/singleclub.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,13 @@ import { AllclubComponent } from './components/allclub/allclub.component';
     AuthComponent,
     HomepageComponent,
     AllclubComponent,
+    SingleclubComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

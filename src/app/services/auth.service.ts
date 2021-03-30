@@ -12,7 +12,7 @@ const BACKEND_URL = environment.apiUrl;
 export class AuthService {
 
   private authMessageEmitter = new Subject<string>();
-  private authEmitter = new Subject<any>();
+  private authEmitter = new Subject<boolean>();
   private token: string = null;
   private isAuthenticated: boolean;
   constructor(private http: HttpClient) { 
