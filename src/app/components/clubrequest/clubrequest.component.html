@@ -1,5 +1,5 @@
-<h1 class="text-center">Club requests</h1>
-<table class="table">
+<h1 class="text-center mb-3">Club requests</h1>
+<table *ngIf="clubRequests.length > 0" class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -27,3 +27,4 @@
     </tr>
   </tbody>
 </table>
+<p *ngIf="clubRequests.length == 0" class="text-center">There is no club requests currently</p>
