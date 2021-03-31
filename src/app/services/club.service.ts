@@ -97,6 +97,11 @@ export class ClubService {
     });
   }
 
+  setClubApproved(club: Club[]) {
+    this.clubApproved = club;
+    this.clubApprovedEmitter.next(this.clubApproved);
+  }
+
   getClubApprovedByName(name: string) {
       const club: Club[] = this.clubApproved.filter(x => x.name == name);
       if (club.length == 0) {

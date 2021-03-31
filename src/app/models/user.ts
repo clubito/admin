@@ -1,3 +1,5 @@
+import { Club } from "./club";
+
 export interface User {
     _id: string;
     name: string;
@@ -5,22 +7,10 @@ export interface User {
     isDisabled: boolean;
     isConfirmed: boolean;
     profilePicture: string;
-    clubs: [
-        {
-            club: any,
-            role: string,
-            approvalDate: Date
-        }
-    ];
-    joinRequests: [
-        {
-            club: any,
-            status: string,
-            requestedAt: Date
-        }
-    ];
+    clubs: {club: Club, role: string, approvalDate: Date}[];
+    joinRequests: {club: Club, status: string, requestedAt: Date}[];
     appRole: string;
-    clubTags: [string];
+    clubTags: string[];
     banned: boolean;
     bio: string;
     createdAt: Date;
