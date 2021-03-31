@@ -1,0 +1,29 @@
+<h1 class="text-center">Club requests</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Created at</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let club of clubRequests; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{club.name}}</td>
+        <td>{{club.description}}</td>
+        <td><a routerLink="/users/{{getClubOwner(club._id)._id}}">{{getClubOwner(club._id).member.name}}</a></td>
+        <td>{{club.createdAt}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="approveRequest(club._id)">Approve</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-secondary" (click)="rejectRequest(club._id)">Reject</button>
+        </td>
+    </tr>
+  </tbody>
+</table>

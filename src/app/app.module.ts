@@ -11,6 +11,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { AllclubComponent } from './components/allclub/allclub.component';
 import { SingleclubComponent } from './components/singleclub/singleclub.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ClubrequestComponent } from './components/clubrequest/clubrequest.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AllclubComponent,
     SingleclubComponent,
     NavbarComponent,
+    ClubrequestComponent,
   ],
   imports: [
     BrowserModule,

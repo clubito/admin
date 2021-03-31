@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscription = this.clubService.getClubRequestsEmitter().subscribe(response => {
       this.requestsNum = response.length;
     }) 
+    this.clubService.getAllClubs();
   }
 
   logout() {
