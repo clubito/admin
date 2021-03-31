@@ -2,3 +2,12 @@ hr {
     border: solid 1px black;
     margin-top: 3rem;
 }
+
+img {
+    width: 20rem;
+    height: 20rem;
+}
+
+.btn-lg {
+    width: 30rem;
+}

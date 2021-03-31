@@ -40,19 +40,21 @@ export class UserService {
       user.clubs.forEach(club => {
         const index = this.clubService.getClubApproved().findIndex(x => x._id === club.club._id);
         if (index !== -1) {
-          copyClubList[index].members = (copyClubList[index].members as any[]).filter(item => { return !item.member.equals(user._id); });
-          copyClubList[index].joinRequests = (copyClubList[index].joinRequests as any[]).filter(item => { return !item.user.equals(user._id); });
+          copyClubList[index].members = (copyClubList[index].members as any[]).filter(item => item.member._id !== user._id);
+          copyClubList[index].joinRequests = (copyClubList[index].joinRequests as any[]).filter(item => item.user._id !== user._id);
         }
       })
       user.banned = true;
       this.clubService.setClubApproved(copyClubList);
+      console.log(this.usersList);
+      this.usersListEmitter.next(this.usersList);
     }, err => {
       console.log(err.error.error);
     })
   }
 
   unbanUser(id: string) {
-    this.http.post<any>(BACKEND_URL + "/ban", {id}).subscribe(() => {
+    this.http.post<any>(BACKEND_URL + "/unban", {id}).subscribe(() => {
       const user = this.getUserById(id);
       const copyClubList = [...this.clubService.getClubApproved()];
       user.clubs.forEach(userClub => {
@@ -69,6 +71,7 @@ export class UserService {
       })
       user.banned = false;
       this.clubService.setClubApproved(copyClubList);
+      this.usersListEmitter.next(this.usersList);
     }, err => {
       console.log(err.error.error);
     })
@@ -81,26 +84,27 @@ export class UserService {
       user.clubs.forEach(userClub => {
         const index = this.clubService.getClubApproved().findIndex(x => x._id === userClub.club._id);
         if (index !== -1) {
-          copyClubList[index].members = (copyClubList[index].members as any[]).filter(item => { return !item.member.equals(user._id); });
-          copyClubList[index].joinRequests = (copyClubList[index].joinRequests as any[]).filter(item => { return !item.user.equals(user._id); });
+          copyClubList[index].members = (copyClubList[index].members as any[]).filter(item => item.member._id !== user._id);
+          copyClubList[index].joinRequests = (copyClubList[index].joinRequests as any[]).filter(item => item.user._id !== user._id);
         }
       })
       user.joinRequests.forEach(userClub => {
         const index = this.clubService.getClubApproved().findIndex(x => x._id === userClub.club._id);
         if (index !== -1) {
-          copyClubList[index].members = (copyClubList[index].members as any[]).filter(item => { return !item.member.equals(user._id); });
-          copyClubList[index].joinRequests = (copyClubList[index].joinRequests as any[]).filter(item => { return !item.user.equals(user._id); });
+          copyClubList[index].members = (copyClubList[index].members as any[]).filter(item => item.member._id !== user._id);
+          copyClubList[index].joinRequests = (copyClubList[index].joinRequests as any[]).filter(item => item.user._id !== user._id);
         }
       })
       this.clubService.setClubApproved(copyClubList);
       // remove user from the array
       this.usersList = this.usersList.filter(x => x._id !== user._id);
+      this.usersListEmitter.next(this.usersList);
     }, err => {
       console.log(err.error.error);
     })
   }
 
-  private getUserById(id: string) {
+  getUserById(id: string) {
     return this.usersList.find(user => user._id === id);
   }
 }

@@ -1,3 +1,57 @@
-<p>
-  singleuser works!
-</p>
+<div class="text-center">
+  <img [attr.src]="singleUser.profilePicture" alt="" class="img-thumbnail userImage">
+  <h2>{{singleUser.name}}</h2>
+  <p>Email: {{singleUser.email}}</p>
+  <p class="lead">Bio: {{singleUser.bio}}</p>
+  <p>Status: <span class="p-2 text-white" [ngClass]="(singleUser.banned === false)?'bg-success':'bg-danger'">{{getStatus()}}</span></p>
+  <p>Joined at: {{singleUser.createdAt}}</p>
+  <hr>
+  <h5>Clubs participating</h5>
+  <table *ngIf="singleUser.clubs.length > 0" class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Approval date</th>
+        <th scope="col">Role</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let club of singleUser.clubs; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td><a class="no-decoration" routerLink="/clubs/{{club.club.name}}">{{club.club.name}}</a></td>
+        <td>{{club.approvalDate}}</td>
+        <td>{{club.role}}</td>
+        <td><a class="link-secondary" routerLink="/clubs/{{club.club.name}}">Visit club</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="singleUser.clubs.length === 0">User {{singleUser.name}} does not belong to any clubs</p>
+  
+  <hr>
+  <div class="d-grid gap-2 justify-content-center">
+    <button type="button" class="btn btn-dark text-uppercase btn-lg" *ngIf="singleUser.banned === false" (click)="banUser()">Ban user</button>
+    <button type="button" class="btn btn-warning text-uppercase btn-lg" *ngIf="singleUser.banned === true" (click)="unbanUser()">Unban user</button>
+    <button type="button" class="btn btn-danger text-uppercase btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete user</button>
+  </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete user {{singleUser.name}}?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteUser()">Yes</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

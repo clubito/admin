@@ -1,7 +1,7 @@
 <!-- Check if the club exists or not -->
 <div class="text-center">
   <img [attr.src]="singleClub.logo" alt="" class="img-thumbnail">
-  <h1>{{singleClub.name}}</h1>
+  <h2>{{singleClub.name}}</h2>
   <p class="lead">{{singleClub.description}}</p>
   <p>Status: <span class="p-2 text-white" [ngClass]="(singleClub.deleted.isDeleted === false)?'bg-success':'bg-danger'">{{getStatus()}}</span></p>
   <p>Tags: {{singleClub.tags}}</p>
@@ -36,7 +36,7 @@
         <th scope="col">Name</th>
         <th scope="col">Email</th>
         <th scope="col">Role</th>
-        <th scope="col">Link</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -52,9 +52,9 @@
 
   <hr>
     <!-- delete, undelete club -->
-    <div class="d-grid gap-2">
-      <button type="button" class="btn btn-danger text-uppercase" [ngClass]="{'disabled': singleClub.deleted.isDeleted === true}" (click)="deleteClub()">Delete club</button>
-      <button type="button" class="btn btn-warning text-uppercase" [ngClass]="{'disabled': singleClub.deleted.isDeleted === false}" (click)="undeleteClub()">Undelete club</button>
+    <div class="d-grid gap-2 justify-content-center">
+      <button type="button" class="btn btn-danger text-uppercase btn-lg" *ngIf="singleClub.deleted.isDeleted === false" (click)="deleteClub()">Delete club</button>
+      <button type="button" class="btn btn-warning text-uppercase btn-lg" *ngIf="singleClub.deleted.isDeleted === true" (click)="undeleteClub()">Undelete club</button>
     </div>
 </div>
 

@@ -1,0 +1,24 @@
+.userImage {
+    width: 15rem;
+    height: 20rem;
+}
+
+.clubImage {
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1.5rem;
+}
+
+hr {
+    border: solid 1px black;
+    margin-top: 3rem;
+}
+
+a.no-decoration {
+    text-decoration: none;
+    color: black;
+}
+
+.btn-lg {
+    width: 30rem;
+}
