@@ -1,0 +1,25 @@
+img {
+    width: 15rem;
+    height: 20rem;
+}
+
+button {
+    margin-top: 1rem;
+}
+
+.card { 
+    background-color: rgba(245, 245, 245, 0.5); 
+    /* display: inline-block; */
+}
+
+.card-body {
+    padding-top: 0;
+}
+
+/* .card-body {
+    float: right;
+}
+
+.image {
+    float: left;
+} */
