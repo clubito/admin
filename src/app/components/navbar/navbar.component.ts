@@ -11,7 +11,7 @@ import { ClubService } from 'src/app/services/club.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private requestsNum: number;
+  requestsNum: number;
 
   constructor(private authService: AuthService, private clubService: ClubService, private router: Router) {
     this.requestsNum = this.clubService.getClubRequests().length;

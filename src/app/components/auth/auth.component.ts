@@ -13,7 +13,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   private authMessageListener: Subscription;
   private authListener: Subscription;
-  private errorMessage: string;
+  errorMessage: string;
   constructor(private authService: AuthService, private router: Router) {}
   
   ngOnInit() {

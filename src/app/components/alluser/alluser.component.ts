@@ -9,10 +9,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./alluser.component.css']
 })
 export class AlluserComponent implements OnInit, OnDestroy {
-  private itemPerRow: number = 4;
-  private isActivePage: boolean = true;
+  itemPerRow: number = 4;
+  isActivePage: boolean = true;
   private subscription: Subscription;
-  private userList: User[] = [];
+  userList: User[] = [];
   constructor(private userService: UserService) {
     this.userList = this.userService.getUsersList();
   }
@@ -28,7 +28,7 @@ export class AlluserComponent implements OnInit, OnDestroy {
     this.userService.getAllUsers();
   }
 
-  private toggleActivePage(activePage: boolean) {
+  toggleActivePage(activePage: boolean) {
     this.isActivePage = activePage;
     console.log(this.isActivePage);
   }
@@ -41,7 +41,7 @@ export class AlluserComponent implements OnInit, OnDestroy {
     return this.userList.filter(x => x.banned === true);
   }
 
-  private getTuple(array: User[], size: number) {
+  getTuple(array: User[], size: number) {
     const result: User[][] = [];
     let temp: User[] = [];
     for (let item of array) {

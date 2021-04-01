@@ -9,7 +9,7 @@ import { ClubService } from 'src/app/services/club.service';
   styleUrls: ['./clubrequest.component.css']
 })
 export class ClubrequestComponent implements OnInit, OnDestroy {
-  private clubRequests: Club[] = [];
+  clubRequests: Club[] = [];
   private subscription: Subscription;
   constructor(private clubService: ClubService) { 
     this.clubRequests = this.clubService.getClubRequests();
@@ -26,15 +26,15 @@ export class ClubrequestComponent implements OnInit, OnDestroy {
     this.clubService.getAllClubs();
   }
 
-  private approveRequest(id: string) {
+  approveRequest(id: string) {
     this.clubService.approveClubRequest(id);
   }
 
-  private rejectRequest(id: string) {
+  rejectRequest(id: string) {
     this.clubService.rejectClubRequest(id);
   }
 
-  private getClubOwner(id: string) {
+  getClubOwner(id: string) {
     const club = this.clubRequests.find(club => club._id === id);
     const owner = club.members.find(member => member.role === "OWNER");
     return owner;

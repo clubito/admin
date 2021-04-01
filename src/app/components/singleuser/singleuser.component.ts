@@ -13,8 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SingleuserComponent implements OnInit, OnDestroy {
   private id: string;
-  private singleUser: User;
-  private userClubs: any[] = [];
+  singleUser: User;
+  userClubs: any[] = [];
   private subscription: Subscription;
   constructor(private route: ActivatedRoute, private userService: UserService, private clubService: ClubService, private router: Router) { }
 

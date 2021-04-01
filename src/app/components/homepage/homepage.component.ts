@@ -11,9 +11,9 @@ import { UserService } from 'src/app/services/user.service';
 export class HomepageComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  private clubsNum: number;
-  private requestsNum: number;
-  private usersNum: number;
+  clubsNum: number;
+  requestsNum: number;
+  usersNum: number;
   constructor(private clubService: ClubService, private userService: UserService) { 
     this.requestsNum = this.clubService.getClubRequests().length;
     this.clubsNum = this.clubService.getClubApproved().length;

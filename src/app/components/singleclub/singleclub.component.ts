@@ -11,7 +11,7 @@ import { ClubService } from 'src/app/services/club.service';
 })
 export class SingleclubComponent implements OnInit, OnDestroy {
   private clubName: string;
-  private singleClub: Club;
+  singleClub: Club;
   private subscription: Subscription;
   constructor(private route: ActivatedRoute, private clubService: ClubService) { }
 

@@ -9,9 +9,9 @@ import { ClubService } from 'src/app/services/club.service';
   styleUrls: ['./allclub.component.css']
 })
 export class AllclubComponent implements OnInit, OnDestroy {
-  private isActivePage: boolean = true;
-  private itemPerRow: number = 2;
-  private clubApproved: Club[] = [];
+  isActivePage: boolean = true;
+  itemPerRow: number = 2;
+  clubApproved: Club[] = [];
   private clubApprovedListener: Subscription;
   constructor(private clubService: ClubService) { 
     this.clubApproved = clubService.getClubApproved();
@@ -32,7 +32,7 @@ export class AllclubComponent implements OnInit, OnDestroy {
     this.clubApprovedListener.unsubscribe();
   }
 
-  private getTuple(array: Club[], size: number) {
+  getTuple(array: Club[], size: number) {
     const result: Club[][] = [];
     let temp: Club[] = [];
     for (let item of array) {
@@ -48,17 +48,17 @@ export class AllclubComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  private toggleActivePage(activePage: boolean) {
+  toggleActivePage(activePage: boolean) {
     this.isActivePage = activePage;
     // this.isActivePage ? false : true;
     console.log(this.isActivePage);
   }
 
-  private getActiveClubs() {
+  getActiveClubs() {
     return this.clubApproved.filter(club => club.deleted.isDeleted === false);
   }
 
-  private getDeletedClubs() {
+  getDeletedClubs() {
     return this.clubApproved.filter(club => club.deleted.isDeleted === true);
   }
 }
