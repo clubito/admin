@@ -32,7 +32,7 @@
   <div *ngIf="singleUser.appRole !== 'ADMIN'">
     <hr>
     <div class="d-grid gap-2 justify-content-center">
-      <button type="button" class="btn btn-dark text-uppercase btn-lg" *ngIf="singleUser.banned === false" (click)="banUser()" >Ban user</button>
+      <button type="button" class="btn btn-dark text-uppercase btn-lg" *ngIf="singleUser.banned === false" data-bs-toggle="modal" data-bs-target="#exampleModal2" >Ban user</button>
       <button type="button" class="btn btn-warning text-uppercase btn-lg" *ngIf="singleUser.banned === true" (click)="unbanUser()" >Unban user</button>
       <button type="button" class="btn btn-danger text-uppercase btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete user</button>
     </div>
@@ -50,6 +50,25 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteUser()">Yes</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Ban confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to ban user {{singleUser.name}}?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="banUser()">Yes</button>
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
           </div>
         </div>
