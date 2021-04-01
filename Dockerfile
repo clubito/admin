@@ -12,10 +12,12 @@ RUN npm install
 
 COPY . /app
 
-RUN npm run build
+# RUN npm run build
+EXPOSE 4200
+CMD ["npm", "run", "start-production"]
 
 # Stage 2
 
-FROM nginx:1.17.1-alpine
-
-COPY --from=build-step /app/dist/admin /usr/share/nginx/html
+# FROM nginx:1.17.1-alpine
+# COPY nginx.config /etc/nginx/conf.d/default.conf
+# COPY --from=build-step /app/dist/admin /usr/share/nginx/html
