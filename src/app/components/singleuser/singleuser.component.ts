@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Club } from 'src/app/models/club';
 import { User } from 'src/app/models/user';
-import { ClubService } from 'src/app/services/club.service';
 import { UserService } from 'src/app/services/user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-singleuser',
@@ -16,7 +15,7 @@ export class SingleuserComponent implements OnInit, OnDestroy {
   singleUser: User;
   userClubs: any[] = [];
   private subscription: Subscription;
-  constructor(private route: ActivatedRoute, private userService: UserService, private clubService: ClubService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private location: Location) { }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -50,6 +49,6 @@ export class SingleuserComponent implements OnInit, OnDestroy {
 
   deleteUser() {
     this.userService.deleteUser(this.singleUser._id);
-    this.router.navigate(["/users"])
+    this.location.back();
   }
 }
