@@ -12,6 +12,8 @@ export class AllclubComponent implements OnInit, OnDestroy {
   isActivePage: boolean = true;
   itemPerRow: number = 2;
   clubApproved: Club[] = [];
+  searchName: string;
+
   private clubApprovedListener: Subscription;
   constructor(private clubService: ClubService) { 
     this.clubApproved = clubService.getClubApproved();
@@ -60,5 +62,9 @@ export class AllclubComponent implements OnInit, OnDestroy {
 
   getDeletedClubs() {
     return this.clubApproved.filter(club => club.deleted.isDeleted === true);
+  }
+
+  search() {
+    this.clubService.searchClub(this.searchName);
   }
 }

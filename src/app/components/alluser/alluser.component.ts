@@ -11,8 +11,9 @@ import { UserService } from 'src/app/services/user.service';
 export class AlluserComponent implements OnInit, OnDestroy {
   itemPerRow: number = 4;
   isActivePage: boolean = true;
-  private subscription: Subscription;
   userList: User[] = [];
+  searchName: string;
+  private subscription: Subscription;
   constructor(private userService: UserService) {
     this.userList = this.userService.getUsersList();
   }
@@ -55,6 +56,10 @@ export class AlluserComponent implements OnInit, OnDestroy {
       result.push(temp);
     }
     return result;
+  }
+
+  search() {
+    this.userService.searchUser(this.searchName);
   }
 
 

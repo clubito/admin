@@ -125,4 +125,12 @@ export class ClubService {
   getClubRequests() {
     return this.clubRequests;
   }
+
+  searchClub(clubName: string) {
+    const resultApprove = this.clubApproved.filter(club => club.name.toLowerCase().includes(clubName.toLowerCase()));
+    this.clubApprovedEmitter.next(resultApprove);
+    const resultRequest = this.clubRequests.filter(club => club.name.toLowerCase().includes(clubName.toLowerCase()));
+    this.clubRequestsEmitter.next(resultRequest);
+  }
+
 }

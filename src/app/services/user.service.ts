@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AttachSession } from 'protractor/built/driverProviders';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { isError } from 'util';
 import { User } from '../models/user';
 import { ClubService } from './club.service';
 
@@ -106,5 +107,12 @@ export class UserService {
 
   getUserById(id: string) {
     return this.usersList.find(user => user._id === id);
+  }
+
+  searchUser(name: string) {
+    const resultByName = this.usersList.filter(user => user.name.toLowerCase().includes(name.toLowerCase()));
+    const resultByEmail = this.usersList.filter(user => user.email.toLowerCase().includes(name.toLowerCase()));
+    const combineResult = resultByName.concat(resultByEmail.filter((item) => resultByName.indexOf(item) < 0)) // to get unique user list
+    this.usersListEmitter.next(combineResult);
   }
 }

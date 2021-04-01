@@ -11,6 +11,7 @@
 
   <!-- Active clubs page -->
   <div *ngIf="isActivePage">
+    <input class="form-control mt-3" type="text" name="searchName" [(ngModel)]="searchName" (ngModelChange)="search()" placeholder="Search...">
     <div *ngIf="getActiveClubs(clubApproved).length > 0">
       <p class="mt-3">Number of active clubs: {{getActiveClubs(clubApproved).length}}</p>
       <div *ngFor="let clubSubArray of getTuple(getActiveClubs(clubApproved), itemPerRow)" class="row text-center">
@@ -39,6 +40,7 @@
 
   <!-- Deleted clubs page -->
   <div *ngIf="!isActivePage">
+    <input class="form-control mt-3" type="text" name="searchName" [(ngModel)]="searchName" (ngModelChange)="search()" placeholder="Search...">
     <div *ngIf="getDeletedClubs(clubApproved).length > 0">
       <p class="mt-3">Number of deleted clubs: {{getDeletedClubs(clubApproved).length}}</p>
       <div *ngFor="let clubSubArray of getTuple(getDeletedClubs(clubApproved), itemPerRow)" class="row text-center">
