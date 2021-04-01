@@ -13,7 +13,6 @@
   <div *ngIf="isActivePage">
     <div *ngIf="getActiveUsers().length > 0">
       <p class="mt-3">Number of active users: {{getActiveUsers().length}}</p>
-      <input type="search" class="form-control" placeholder="Search...">
       <div *ngFor="let userSubArray of getTuple(getActiveUsers(), itemPerRow)" class="row text-center">
         <div *ngFor="let user of userSubArray" class="col-3">
           <div class="card mt-3">
@@ -40,7 +39,6 @@
   <div *ngIf="!isActivePage">
     <div *ngIf="getBanUsers().length > 0">
       <p class="mt-3">Number of ban users: {{getBanUsers().length}}</p>
-      <input type="search" class="form-control" placeholder="Search...">
       <div *ngFor="let userSubArray of getTuple(getBanUsers(), itemPerRow)" class="row text-center">
         <div *ngFor="let user of userSubArray" class="col-3">
           <div class="card mt-3">
