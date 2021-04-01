@@ -22,3 +22,4 @@ RUN npm run build-production
 FROM nginx:1.17.1-alpine
 
 COPY --from=build-step /app/dist/admin /usr/share/nginx/html
+COPY --from=build-step /app/nginx.conf /etc/nginx/conf.d/default.conf
