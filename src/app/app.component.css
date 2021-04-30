@@ -2,3 +2,11 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.outerContainer {
+    /* width: 100vw; */
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

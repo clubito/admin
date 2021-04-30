@@ -1,13 +1,21 @@
-<h5>Edit your profile</h5>
+<h3>Edit your profile</h3>
 <div class="mb-3">
   <label for="nameSetting" class="form-label">Name</label>
-  <input type="text" class="form-control" id="nameSetting" name="name"  [(ngModel)]="adminAccount.name">
+  <input type="text" class="form-control" id="nameSetting" [(ngModel)]="adminAccount.name">
 </div>
 <div class="mb-3">
   <label for="bioSetting" class="form-label">Bio</label>
-  <textarea class="form-control" id="bioSetting" name="bio" rows="3" [(ngModel)]="adminAccount.bio"></textarea>
+  <textarea class="form-control" id="bioSetting" rows="3" [(ngModel)]="adminAccount.bio"></textarea>
 </div>
-<button type="submit" class="btn btn-primary" (click)="submitSettings()">Edit</button>
+<button type="button" class="btn btn-primary" (click)="submitSettings()">Edit</button>
 <div class="alert alert-success mt-3" role="alert" *ngIf="message">
   <strong>{{message}}</strong>
 </div>
+
+
+<h3 class="mt-5">Edit page theme</h3>
+<select [(ngModel)]="selectedValue" class="form-select" aria-label="Default select example">
+  <!-- <option selected>Open this select menu</option> -->
+  <option *ngFor="let theme of themes" [value]="theme">{{theme}}</option>
+</select>
+<button type="button" class="btn btn-primary mt-3" (click)="changeTheme()">Change theme</button>

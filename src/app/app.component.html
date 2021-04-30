@@ -1,5 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div class="outerContainer" [style.background-image]="getTheme()">
 <app-navbar *ngIf="isAuthenticated"></app-navbar>
-<div class="container">
-<router-outlet></router-outlet>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container">
+    <router-outlet></router-outlet>
+    </div>
+</div>
 </div>

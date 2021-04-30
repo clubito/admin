@@ -7,5 +7,5 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50vh;
+    padding-top: 350px;
 }
