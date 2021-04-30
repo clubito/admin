@@ -40,7 +40,11 @@ export class ThemeService {
   }
 
   getCurrentTheme() {
-    return localStorage.getItem("theme");
+    const themeName = localStorage.getItem("theme");
+    if (themeName == null) {
+      return "default"
+    }
+    return themeName;
   }
 
   getThemeUrlByName(themeName) {
