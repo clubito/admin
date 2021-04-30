@@ -31,15 +31,18 @@ export class AlluserComponent implements OnInit, OnDestroy {
 
   toggleActivePage(activePage: boolean) {
     this.isActivePage = activePage;
-    console.log(this.isActivePage);
   }
 
   getActiveUsers() {
-    return this.userList.filter(x => x.banned === false);
+    return this.userList.filter(x => x.banned === false && x.deleted.isDeleted === false);
   }
 
   getBanUsers() {
-    return this.userList.filter(x => x.banned === true);
+    return this.userList.filter(x => x.banned === true && x.deleted.isDeleted === false);
+  }
+
+  getDeletedUsers() {
+    return this.userList.filter(x => x.deleted.isDeleted === true);
   }
 
   getTuple(array: User[], size: number) {

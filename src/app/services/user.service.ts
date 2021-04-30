@@ -102,8 +102,34 @@ export class UserService {
         }
       })
       this.clubService.setClubApproved(copyClubList);
-      // remove user from the array
-      this.usersList = this.usersList.filter(x => x._id !== user._id);
+      user.deleted.isDeleted = true;
+      user.deleted.deletedAt = new Date(Date.now());
+      this.usersListEmitter.next(this.usersList);
+    }, err => {
+      console.log(err.error.error);
+    })
+  }
+
+  undeleteUser(id: string) {
+    this.http.post<any>(BACKEND_URL + "/undelete", {id}).subscribe(() => {
+      const user = this.getUserById(id);
+      const copyClubList = [...this.clubService.getClubApproved()];
+      user.clubs.forEach(userClub => {
+        const index = this.clubService.getClubApproved().findIndex(x => x._id === userClub.club._id);
+        if (index !== -1) {
+          copyClubList[index].members.push({member: user, role: userClub.role});
+        }
+      })
+      user.joinRequests.forEach(userClub => {
+        const index = this.clubService.getClubApproved().findIndex(x => x._id === userClub.club._id);
+        if (index !== -1) {
+          copyClubList[index].joinRequests.push({user: user, status: userClub.status, requestedAt: userClub.requestedAt});
+        }
+      })
+
+      user.deleted.isDeleted = false;
+      user.deleted.deletedAt = null;
+      this.clubService.setClubApproved(copyClubList);
       this.usersListEmitter.next(this.usersList);
     }, err => {
       console.log(err.error.error);
@@ -128,7 +154,7 @@ export class UserService {
       profilePicture: adminAccount.profilePicture,
       tags: adminAccount.clubTags,
       bio: adminAccount.bio
-    }).subscribe(res => {
+    }).subscribe(() => {
       const copyUserList = [...this.usersList];
       const index = copyUserList.findIndex(x => x._id === adminAccount._id);
       copyUserList[index].email = adminAccount.email;

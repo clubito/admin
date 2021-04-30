@@ -14,4 +14,8 @@ export interface User {
     banned: boolean;
     bio: string;
     createdAt: Date;
+    deleted: {
+        isDeleted: boolean,
+        deletedAt: Date
+    };
 }

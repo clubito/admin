@@ -36,7 +36,14 @@ export class SingleuserComponent implements OnInit, OnDestroy {
   }
 
   getStatus() {
-    return this.singleUser.banned === true ? "Ban" : "Active"
+    if (this.singleUser.deleted.isDeleted === true ) {
+      return "DELETE";
+    }
+    if (this.singleUser.banned === true) {
+      return "BAN"; 
+    } else {
+      return "ACTIVE"
+    }
   }
 
   banUser() {
@@ -49,6 +56,10 @@ export class SingleuserComponent implements OnInit, OnDestroy {
 
   deleteUser() {
     this.userService.deleteUser(this.singleUser._id);
-    this.location.back();
+    // this.location.back();
+  }
+
+  undeleteUser() {
+    this.userService.undeleteUser(this.singleUser._id);
   }
 }

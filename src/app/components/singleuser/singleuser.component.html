@@ -3,7 +3,7 @@
   <h2>{{singleUser.name}}</h2>
   <p>Email: {{singleUser.email}}</p>
   <p class="lead">Bio: {{singleUser.bio}}</p>
-  <p>Status: <span class="p-2 text-white" [ngClass]="(singleUser.banned === false)?'bg-success':'bg-danger'">{{getStatus()}}</span></p>
+  <p>Status: <span class="p-2 text-white" [ngClass]="(singleUser.banned === false && singleUser.deleted.isDeleted === false)?'bg-success':'bg-danger'">{{getStatus()}}</span></p>
   <p>Joined at: {{singleUser.createdAt}}</p>
   <hr>
   <h5>Clubs participating</h5>
@@ -32,9 +32,10 @@
   <div *ngIf="singleUser.appRole !== 'ADMIN'">
     <hr>
     <div class="d-grid gap-2 justify-content-center">
-      <button type="button" class="btn btn-dark text-uppercase btn-lg" *ngIf="singleUser.banned === false" data-bs-toggle="modal" data-bs-target="#exampleModal2" >Ban user</button>
-      <button type="button" class="btn btn-warning text-uppercase btn-lg" *ngIf="singleUser.banned === true" (click)="unbanUser()" >Unban user</button>
-      <button type="button" class="btn btn-danger text-uppercase btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete user</button>
+      <button type="button" class="btn btn-dark text-uppercase btn-lg" *ngIf="singleUser.banned === false && singleUser.deleted.isDeleted === false" data-bs-toggle="modal" data-bs-target="#exampleModal2" >Ban user</button>
+      <button type="button" class="btn btn-warning text-uppercase btn-lg" *ngIf="singleUser.banned === true && singleUser.deleted.isDeleted === false" (click)="unbanUser()" >Unban user</button>
+      <button type="button" class="btn btn-danger text-uppercase btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="singleUser.deleted.isDeleted === false">Delete user</button>
+      <button type="button" class="btn btn-warning text-uppercase btn-lg" *ngIf="singleUser.deleted.isDeleted === true" (click)="undeleteUser()">Undelete user</button>
     </div>
   </div>
     <!-- Modal -->
