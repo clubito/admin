@@ -15,6 +15,7 @@ import { ClubrequestComponent } from './components/clubrequest/clubrequest.compo
 import { AlluserComponent } from './components/alluser/alluser.component';
 import { SingleuserComponent } from './components/singleuser/singleuser.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { AnnouncementsComponent } from './components/announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     AlluserComponent,
     SingleuserComponent,
     SettingsComponent,
+    AnnouncementsComponent,
   ],
   imports: [
     BrowserModule,

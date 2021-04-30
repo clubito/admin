@@ -34,7 +34,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.adminAccount = this.userService.getUsersList().filter(x => x.appRole.toLowerCase() === "admin")[0];
     }));
     this.subscriptions.push(this.userService.getNotificationEmitter().subscribe(res => {
-      this.message = res.message;
+      if (res) {
+        this.message = "Updated profile successfully";
+      }
     }))
     this.userService.getAllUsers();
   }

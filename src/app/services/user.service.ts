@@ -14,7 +14,7 @@ const BACKEND_URL = `${environment.apiUrl}/users`
 export class UserService {
 
   private usersListEmitter: Subject<User[]> = new Subject<User[]>();
-  private notificationEmitter: Subject<{success: boolean, message: string}> = new Subject<{success: boolean, message: string}>();
+  private notificationEmitter: Subject<boolean> = new Subject<boolean>();
   private usersList: User[] = [];
   constructor(private http: HttpClient, private clubService: ClubService) { }
 
@@ -164,10 +164,7 @@ export class UserService {
       copyUserList[index].bio = adminAccount.bio;
       this.usersList = copyUserList;
       this.usersListEmitter.next(this.usersList);
-      this.notificationEmitter.next({
-        success: true,
-        message: "Updated profile successfully"
-      })
+      this.notificationEmitter.next(true);
     }, err => {
       console.log(err.error.error);
     })

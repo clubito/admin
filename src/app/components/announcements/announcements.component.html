@@ -1,0 +1,9 @@
+  <!-- <label for="announcements" class="form-label">Announcements</label> -->
+<h3 class="text-center mt-5 mb-4">Announcements</h3>
+<textarea class="form-control" id="announcements" rows="12" [(ngModel)]="message"></textarea>
+<div class="d-flex justify-content-center mt-4">
+<button type="button" class="btn btn-primary btn-lg" (click)="submitAnnouncement()">Post</button>
+</div>
+<div class="alert alert-success mt-3" role="alert" *ngIf="result">
+  <strong>{{result}}</strong>
+</div>

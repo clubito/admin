@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AllclubComponent } from './components/allclub/allclub.component';
 import { AlluserComponent } from './components/alluser/alluser.component';
+import { AnnouncementsComponent } from './components/announcements/announcements.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { ClubrequestComponent } from './components/clubrequest/clubrequest.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: "clubs/:name", component: SingleclubComponent, canActivate: [AuthGuard]},
   {path: "users", component: AlluserComponent, canActivate: [AuthGuard]},
   {path: "users/:id", component: SingleuserComponent, canActivate: [AuthGuard]},
-  {path: "settings", component: SettingsComponent, canActivate: [AuthGuard]}
+  {path: "settings", component: SettingsComponent, canActivate: [AuthGuard]},
+  {path: "announcements", component: AnnouncementsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
