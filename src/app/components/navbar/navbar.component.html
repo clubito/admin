@@ -1,13 +1,21 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand text-uppercase" routerLink="/">Clubito</a>
-    <form class="d-flex">
+    <div class="d-flex">
       <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button> -->
-      <button type="button" class="btn btn-light" routerLink="/clubs/requests">
+      <button type="button" class="btn btn-light btnNav" routerLink="/clubs/requests">
         Club Requests <span class="badge bg-secondary">{{requestsNum}}</span>
       </button>
-      <button type="button" class="btn btn-light" (click)="logout()">Log out</button>
-    </form>
+      <div class="dropdown">
+        <button class="btn btn-secondary btnNav" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-user-circle"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
+          <li><button type="button" class="btn btn-light dropdown-item" (click)="logout()">Log out</button></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>

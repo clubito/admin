@@ -14,6 +14,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ClubrequestComponent } from './components/clubrequest/clubrequest.component';
 import { AlluserComponent } from './components/alluser/alluser.component';
 import { SingleuserComponent } from './components/singleuser/singleuser.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SingleuserComponent } from './components/singleuser/singleuser.componen
     ClubrequestComponent,
     AlluserComponent,
     SingleuserComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
