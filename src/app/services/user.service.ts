@@ -14,6 +14,7 @@ const BACKEND_URL = `${environment.apiUrl}/users`
 export class UserService {
 
   private usersListEmitter: Subject<User[]> = new Subject<User[]>();
+  private notificationEmitter: Subject<{success: boolean, message: string}> = new Subject<{success: boolean, message: string}>();
   private usersList: User[] = [];
   constructor(private http: HttpClient, private clubService: ClubService) { }
 
@@ -28,6 +29,10 @@ export class UserService {
 
   getUsersListEmitter() {
     return this.usersListEmitter.asObservable();
+  }
+
+  getNotificationEmitter() {
+    return this.notificationEmitter.asObservable();
   }
 
   getUsersList() {
@@ -114,5 +119,31 @@ export class UserService {
     const resultByEmail = this.usersList.filter(user => user.email.toLowerCase().includes(name.toLowerCase()));
     const combineResult = resultByName.concat(resultByEmail.filter((item) => resultByName.indexOf(item) < 0)) // to get unique user list
     this.usersListEmitter.next(combineResult);
+  }
+
+  editAdminInfo(adminAccount: User) {
+    this.http.put(environment.apiUrl + "/profile", {
+      email: adminAccount.email,
+      name: adminAccount.name,
+      profilePicture: adminAccount.profilePicture,
+      tags: adminAccount.clubTags,
+      bio: adminAccount.bio
+    }).subscribe(res => {
+      const copyUserList = [...this.usersList];
+      const index = copyUserList.findIndex(x => x._id === adminAccount._id);
+      copyUserList[index].email = adminAccount.email;
+      copyUserList[index].name = adminAccount.name;
+      copyUserList[index].profilePicture = adminAccount.profilePicture;
+      copyUserList[index].clubTags = adminAccount.clubTags;
+      copyUserList[index].bio = adminAccount.bio;
+      this.usersList = copyUserList;
+      this.usersListEmitter.next(this.usersList);
+      this.notificationEmitter.next({
+        success: true,
+        message: "Updated profile successfully"
+      })
+    }, err => {
+      console.log(err.error.error);
+    })
   }
 }

@@ -1,3 +1,13 @@
-<p>
-  settings works!
-</p>
+<h5>Edit your profile</h5>
+<div class="mb-3">
+  <label for="nameSetting" class="form-label">Name</label>
+  <input type="text" class="form-control" id="nameSetting" name="name"  [(ngModel)]="adminAccount.name">
+</div>
+<div class="mb-3">
+  <label for="bioSetting" class="form-label">Bio</label>
+  <textarea class="form-control" id="bioSetting" name="bio" rows="3" [(ngModel)]="adminAccount.bio"></textarea>
+</div>
+<button type="submit" class="btn btn-primary" (click)="submitSettings()">Edit</button>
+<div class="alert alert-success mt-3" role="alert" *ngIf="message">
+  <strong>{{message}}</strong>
+</div>
